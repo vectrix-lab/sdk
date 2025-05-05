@@ -1,0 +1,45 @@
+VECTRIX SDK LICENSE AGREEMENT
+
+Copyright (c) 2025 VECTRIX Lab. All rights reserved.
+
+NOTICE: This software is proprietary and confidential.
+
+This software and its documentation are protected by copyright law and international
+treaties. Unauthorized reproduction or distribution of this software, or any portion
+of it, may result in severe civil and criminal penalties, and will be prosecuted to
+the maximum extent possible under the law.
+
+TERMS AND CONDITIONS
+
+1. LICENSE GRANT
+   Subject to the terms of this Agreement and payment of applicable fees, VECTRIX Lab
+   grants you a limited, non-exclusive, non-transferable license to use the SDK for
+   your internal development purposes only.
+
+2. RESTRICTIONS
+   You may not:
+   - Sublicense, sell, resell, transfer, assign, or otherwise dispose of the SDK
+   - Modify or make derivative works based upon the SDK
+   - Reverse engineer or access the SDK to build a competitive product
+   - Use the SDK to develop software that competes with VECTRIX products
+   - Remove any proprietary notices or labels on the SDK
+
+3. API TOKEN REQUIREMENT
+   Use of this SDK requires a valid API token obtained from VECTRIX Lab. The SDK
+   will not function without proper authentication. API tokens are subject to
+   usage limits and terms specified in your subscription agreement.
+
+4. DATA COLLECTION
+   The SDK may collect anonymous usage metrics for performance optimization and
+   product improvement. No personally identifiable information is collected.
+
+5. WARRANTY DISCLAIMER
+   THE SDK IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+
+6. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL VECTRIX LAB BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
+   EXEMPLARY, OR CONSEQUENTIAL DAMAGES.
+
+For licensing inquiries: legal@vectrix.dev
+For technical support: support@vectrix.dev
+

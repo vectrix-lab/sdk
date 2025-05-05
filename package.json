@@ -1,0 +1,1 @@
+{"name":"@vectrix-lab/sdk","version":"0.0.1","description":"Distributed physics simulation SDK","main":"dist/index.js","types":"dist/index.d.ts","scripts":{"build":"tsc"},"author":"VECTRIX Lab","license":"SEE LICENSE IN LICENSE"}

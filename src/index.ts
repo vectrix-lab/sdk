@@ -6,3 +6,4 @@ export * from './collision';
 export * from './pathfinding';
 export * from './sensors';
 export * from './executor';
+export * from './logging';

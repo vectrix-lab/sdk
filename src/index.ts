@@ -7,3 +7,4 @@ export * from './pathfinding';
 export * from './sensors';
 export * from './executor';
 export * from './logging';
+export * from './scenarios';

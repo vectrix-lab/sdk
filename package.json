@@ -1,1 +1,85 @@
-{"name":"@vectrix-lab/sdk","version":"0.0.1","description":"Distributed physics simulation SDK","main":"dist/index.js","types":"dist/index.d.ts","scripts":{"build":"tsc"},"author":"VECTRIX Lab","license":"SEE LICENSE IN LICENSE"}
+{
+  "name": "@vectrix-lab/sdk",
+  "version": "1.9.0",
+  "description": "Distributed physics simulation SDK for multi-robot motion planning and pathfinding",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "require": "./dist/core/index.js",
+      "import": "./dist/core/index.mjs"
+    },
+    "./scenarios": {
+      "types": "./dist/scenarios/index.d.ts",
+      "require": "./dist/scenarios/index.js",
+      "import": "./dist/scenarios/index.mjs"
+    },
+    "./executor": {
+      "types": "./dist/executor/index.d.ts",
+      "require": "./dist/executor/index.js",
+      "import": "./dist/executor/index.mjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "robotics",
+    "simulation",
+    "pathfinding",
+    "motion-planning",
+    "collision-detection",
+    "drone-swarm",
+    "warehouse-robotics",
+    "autonomous-vehicles",
+    "physics-simulation",
+    "distributed-computing"
+  ],
+  "author": "VECTRIX Lab <sdk@vectrix.dev>",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": "https://github.com/vectrix-lab/sdk",
+  "bugs": {
+    "url": "https://github.com/vectrix-lab/sdk/issues"
+  },
+  "homepage": "https://vectrix.dev",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "eslint": "^8.55.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  }
+}
+

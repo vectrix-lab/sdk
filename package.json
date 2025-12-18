@@ -1,6 +1,6 @@
 {
   "name": "@vectrix-lab/sdk",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Distributed physics simulation SDK for multi-robot motion planning and pathfinding",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

@@ -34,7 +34,7 @@ import type {
 const SDK_VERSION = '2.4.1';
 const API_VERSION = 'v2';
 const PROTOCOL_VERSION = 3;
-const DEFAULT_API_URL = 'https://api.vectrix.dev';
+const DEFAULT_API_URL = 'https://api.vectrix.tech';
 const DEFAULT_TIMEOUT = 30000;
 const DEFAULT_RETRIES = 3;
 

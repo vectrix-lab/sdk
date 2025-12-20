@@ -50,7 +50,7 @@ export class TokenMissingError extends AuthenticationError {
   constructor() {
     super(
       'API token is required. Please provide a valid VECTRIX API token via the apiToken option or VECTRIX_API_TOKEN environment variable. ' +
-      'Visit https://vectrix.dev/dashboard to obtain your token.',
+      'Visit https://vectrix.tech/dashboard to obtain your token.',
       { hint: 'Set VECTRIX_API_TOKEN environment variable or pass apiToken to VectrixClient' }
     );
     this.name = 'TokenMissingError';
@@ -64,7 +64,7 @@ export class TokenMissingError extends AuthenticationError {
 export class TokenInvalidError extends AuthenticationError {
   constructor(reason?: string) {
     super(
-      `Invalid API token${reason ? `: ${reason}` : ''}. Please check your token or generate a new one at https://vectrix.dev/dashboard`,
+      `Invalid API token${reason ? `: ${reason}` : ''}. Please check your token or generate a new one at https://vectrix.tech/dashboard`,
       { reason }
     );
     this.name = 'TokenInvalidError';
@@ -78,7 +78,7 @@ export class TokenInvalidError extends AuthenticationError {
 export class TokenExpiredError extends AuthenticationError {
   constructor(expiredAt?: Date) {
     super(
-      `API token has expired${expiredAt ? ` on ${expiredAt.toISOString()}` : ''}. Please renew your subscription or generate a new token at https://vectrix.dev/dashboard`,
+      `API token has expired${expiredAt ? ` on ${expiredAt.toISOString()}` : ''}. Please renew your subscription or generate a new token at https://vectrix.tech/dashboard`,
       { expiredAt: expiredAt?.toISOString() }
     );
     this.name = 'TokenExpiredError';
@@ -104,7 +104,7 @@ export class QuotaExceededError extends VectrixError {
     super(
       `API quota exceeded for ${quotaType}. Current: ${current}, Limit: ${limit}. ` +
       (resetsAt ? `Resets at ${resetsAt.toISOString()}. ` : '') +
-      'Consider upgrading your plan at https://vectrix.dev/pricing',
+      'Consider upgrading your plan at https://vectrix.tech/pricing',
       'QUOTA_EXCEEDED',
       { quotaType, limit, current, resetsAt: resetsAt?.toISOString() }
     );
@@ -275,7 +275,7 @@ export class FeatureNotAvailableError extends VectrixError {
   constructor(feature: string, requiredPlan?: string) {
     super(
       `Feature "${feature}" is not available${requiredPlan ? `. Requires ${requiredPlan} plan` : ''}. ` +
-      'Visit https://vectrix.dev/pricing for plan details.',
+      'Visit https://vectrix.tech/pricing for plan details.',
       'FEATURE_NOT_AVAILABLE',
       { feature, requiredPlan }
     );

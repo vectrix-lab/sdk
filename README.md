@@ -138,7 +138,6 @@ const replayed = await client.replay(loaded);
 ```typescript
 const client = new VectrixClient({
   apiToken: 'vx_...',
-  apiUrl: 'https://api.vectrix.dev/v2',
   timeout: 30000,
   retries: 3,
   strictMode: true,
@@ -148,7 +147,7 @@ const client = new VectrixClient({
 
 ## API Reference
 
-Full API documentation available at [docs.vectrix.dev](https://docs.vectrix.dev)
+Full API documentation available at [docs.vectrix.tech](https://docs.vectrix.tech)
 
 ### Core Classes
 
@@ -174,9 +173,8 @@ Full API documentation available at [docs.vectrix.dev](https://docs.vectrix.dev)
 
 ## Support
 
-- 📚 Documentation: [docs.vectrix.dev](https://docs.vectrix.dev)
-- 💬 Discord: [discord.gg/vectrix](https://discord.gg/vectrix)
-- 📧 Email: support@vectrix.dev
+- 📚 Documentation: [docs.vectrix.tech](https://docs.vectrix.tech)
+- 📧 Email: support@vectrix.tech
 - 🐛 Issues: [github.com/vectrix-lab/sdk/issues](https://github.com/vectrix-lab/sdk/issues)
 
 ## License
@@ -185,5 +183,5 @@ Proprietary. See [LICENSE](./LICENSE) for details.
 
 ---
 
-© 2024 VECTRIX Lab. All rights reserved.
+© 2025 VECTRIX Lab. All rights reserved.
 

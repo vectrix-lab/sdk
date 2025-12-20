@@ -297,7 +297,7 @@ export class AuthManager {
 
     return {
       sub: `usr_${hash.slice(0, 16)}`,
-      iss: 'https://auth.vectrix.dev',
+      iss: 'https://auth.vectrix.tech',
       iat: now - 3600,
       exp: now + 86400 * 30, // 30 days from now
       plan,

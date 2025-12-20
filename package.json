@@ -53,13 +53,13 @@
     "physics-simulation",
     "distributed-computing"
   ],
-  "author": "VECTRIX Lab <sdk@vectrix.dev>",
+  "author": "VECTRIX Lab <sdk@vectrix.tech>",
   "license": "SEE LICENSE IN LICENSE",
   "repository": "https://github.com/vectrix-lab/sdk",
   "bugs": {
     "url": "https://github.com/vectrix-lab/sdk/issues"
   },
-  "homepage": "https://vectrix.dev",
+  "homepage": "https://vectrix.tech",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },

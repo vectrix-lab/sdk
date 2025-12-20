@@ -5,7 +5,7 @@
 
 import type {
   ScenarioBuildResult,
-  ValidationError,
+  ValidationErrorInfo,
   ValidationWarning,
   EntityDescriptor,
   Vector3,
@@ -137,7 +137,7 @@ export class WarehouseScenario extends Scenario {
   }
 
   protected validateConfig(
-    errors: ValidationError[],
+    errors: ValidationErrorInfo[],
     warnings: ValidationWarning[]
   ): void {
     validateRange(this.config.robotCount, 'robotCount', 1, 100, errors);

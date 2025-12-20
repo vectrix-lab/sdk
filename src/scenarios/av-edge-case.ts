@@ -5,7 +5,7 @@
 
 import type {
   ScenarioBuildResult,
-  ValidationError,
+  ValidationErrorInfo,
   ValidationWarning,
   EntityDescriptor,
   Vector3,
@@ -146,7 +146,7 @@ export class AVEdgeCaseScenario extends Scenario {
   }
 
   protected validateConfig(
-    errors: ValidationError[],
+    errors: ValidationErrorInfo[],
     warnings: ValidationWarning[]
   ): void {
     validateRange(this.config.vehicleCount, 'vehicleCount', 0, 50, errors);

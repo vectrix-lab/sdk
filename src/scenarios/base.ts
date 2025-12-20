@@ -7,7 +7,7 @@ import type {
   ScenarioType,
   ScenarioBuildResult,
   ValidationResult,
-  ValidationError,
+  ValidationErrorInfo,
   ValidationWarning,
   EntityDescriptor,
   WorldConfig,
@@ -27,7 +27,7 @@ export abstract class Scenario {
   abstract build(): ScenarioBuildResult;
 
   validate(): ValidationResult {
-    const errors: ValidationError[] = [];
+    const errors: ValidationErrorInfo[] = [];
     const warnings: ValidationWarning[] = [];
 
     this.validateConfig(errors, warnings);
@@ -40,7 +40,7 @@ export abstract class Scenario {
   }
 
   protected abstract validateConfig(
-    errors: ValidationError[],
+    errors: ValidationErrorInfo[],
     warnings: ValidationWarning[]
   ): void;
 
@@ -136,7 +136,7 @@ export abstract class Scenario {
 export function validatePositiveNumber(
   value: unknown,
   field: string,
-  errors: ValidationError[]
+  errors: ValidationErrorInfo[]
 ): boolean {
   if (typeof value !== 'number' || value <= 0 || !Number.isFinite(value)) {
     errors.push({
@@ -154,7 +154,7 @@ export function validateRange(
   field: string,
   min: number,
   max: number,
-  errors: ValidationError[]
+  errors: ValidationErrorInfo[]
 ): boolean {
   if (typeof value !== 'number' || value < min || value > max) {
     errors.push({
@@ -170,7 +170,7 @@ export function validateRange(
 export function validateVector3(
   value: unknown,
   field: string,
-  errors: ValidationError[]
+  errors: ValidationErrorInfo[]
 ): boolean {
   if (
     typeof value !== 'object' ||

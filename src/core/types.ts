@@ -502,11 +502,11 @@ export interface WorldConfig {
 
 export interface ValidationResult {
   valid: boolean;
-  errors: ValidationError[];
+  errors: ValidationErrorInfo[];
   warnings: ValidationWarning[];
 }
 
-export interface ValidationError {
+export interface ValidationErrorInfo {
   code: string;
   message: string;
   field?: string;

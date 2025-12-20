@@ -5,7 +5,7 @@
 
 import type {
   ScenarioBuildResult,
-  ValidationError,
+  ValidationErrorInfo,
   ValidationWarning,
   EntityDescriptor,
   Vector3,
@@ -153,7 +153,7 @@ export class DroneSwarmScenario extends Scenario {
   }
 
   protected validateConfig(
-    errors: ValidationError[],
+    errors: ValidationErrorInfo[],
     warnings: ValidationWarning[]
   ): void {
     validateRange(this.config.droneCount, 'droneCount', 1, 1000, errors);

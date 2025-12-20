@@ -40,3 +40,4 @@ pnpm-lock.yaml
 .cache/
 
 .TODO.md
+scripts/

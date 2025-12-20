@@ -3,7 +3,7 @@
  * @module @vectrix/sdk/simulation
  */
 
-import type { Vector3 } from '../core/types';
+import type { Vector3, IntegratorType } from '../core/types';
 import { Vec3 } from '../world/transform';
 
 // =============================================================================
@@ -146,7 +146,7 @@ export class RK4Integrator implements Integrator {
 // Factory
 // =============================================================================
 
-export type IntegratorType = 'euler' | 'semi-implicit-euler' | 'verlet' | 'rk4';
+export { IntegratorType };
 
 export function createIntegrator(type: IntegratorType): Integrator {
   switch (type) {

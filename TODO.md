@@ -1,31 +1,55 @@
 # VECTRIX SDK — Roadmap
 
-## Priority 1: Near-term Improvements
-
-### Core & Types
-- [ ] `src/core/types.ts:217` — Add image data encoding support for CameraData
-- [ ] `src/core/types.ts:455` — Extend PlannerConfig with algorithm-specific options
-
-### Simulation
-- [ ] `src/simulation/runtime.ts:249` — Implement path following for entities
-- [ ] Add variable timestep integrator for complex scenarios
-- [ ] Implement energy checks and divergence detectors
-
-### Scenarios
-- [ ] `src/scenarios/drone-swarm.ts:32` — Extend DroneSwarm configuration (formations, communication)
-- [ ] `src/scenarios/warehouse.ts:31` — Add task queue system for robots
-- [ ] `src/scenarios/av-edge-case.ts:31` — Expand edge-case scenario generation
-- [ ] Добавить пример использования `examples/av-edge-case.ts` после доработки AVEdgeCaseScenario
+> **Current Version:** 2.4.1  
+> **Status:** Active Development  
+> **Last Updated:** December 2024
 
 ---
 
-## Priority 2: Architectural Improvements
+## Current Focus (v2.5.0)
+
+Active development priorities for the next release:
+
+| Feature | Status | Owner |
+|---------|--------|-------|
+| Path following for entities | 🔄 In Progress | Core Team |
+| DroneSwarm formations & communication | 🔄 In Progress | Scenarios Team |
+| Warehouse task queue system | 📋 Planned | Scenarios Team |
+| AV edge-case scenario expansion | 📋 Planned | Scenarios Team |
+
+---
+
+## Milestone: v2.5.0 — Simulation Enhancements
+
+**Target:** Q1 2025
+
+### Core & Types
+- [ ] Image data encoding support for `CameraData`
+- [ ] Algorithm-specific options for `PlannerConfig`
+
+### Simulation Runtime
+- [ ] Entity path following implementation
+- [ ] Variable timestep integrator for complex scenarios
+- [ ] Energy checks and divergence detectors
+
+### Scenarios
+- [ ] DroneSwarm: formations, swarm communication
+- [ ] Warehouse: task queue system for robots
+- [ ] AVEdgeCase: expanded edge-case generation
+- [ ] Add `examples/av-edge-case.ts` usage example
+
+---
+
+## Milestone: v2.6.0 — Distributed Computing
+
+**Target:** Q2 2025
 
 ### Distributed Executor
-- [ ] `src/executor/distributed.ts:355` — Implement actual remote worker communication
-- [ ] gRPC transport for distributed computing
+- [ ] Remote worker communication (production-ready)
+- [ ] gRPC transport layer for distributed computing
 - [ ] IPC transport for local parallelism
 - [ ] Worker monitoring and health checks
+- [ ] Load balancing and failover
 
 ### Collision System
 - [ ] BVH (Bounding Volume Hierarchy) for broadphase acceleration
@@ -35,68 +59,74 @@
 ### Pathfinding
 - [ ] RRT* optimization with rewiring
 - [ ] PRM (Probabilistic Roadmap) planner
-- [ ] Integration with external planners (OMPL)
+- [ ] OMPL integration bridge
 
 ---
 
-## Priority 3: Integrations & Adapters
+## Milestone: v3.0.0 — Integrations & Adapters
+
+**Target:** Q3 2025
 
 ### Format Parsers
 - [ ] URDF parser for robot models
 - [ ] SDF parser (Gazebo format)
 - [ ] MJCF parser (MuJoCo format)
 
-### External Integrations
+### Simulation Adapters
 - [ ] Unity adapter
 - [ ] Unreal Engine adapter
 - [ ] Gazebo adapter
 - [ ] Isaac Sim adapter
 
-### Bindings
-- [ ] Python bindings (thin wrapper via WASM or native)
+### Language Bindings
+- [ ] Python bindings (WASM/native wrapper)
 - [ ] REST API wrapper for web integrations
 
 ---
 
-## Priority 4: Advanced Features
+## Future Considerations (v3.x+)
 
 ### GPU Acceleration
 - [ ] WebGPU backend for collision detection
-- [ ] GPU batching for simulations
+- [ ] GPU batching for parallel simulations
 
-### Streaming & Real-time
+### Real-time Streaming
 - [ ] WebSocket API for streaming updates
 - [ ] Incremental state snapshots
 
-### Edge-Case Generation
+### Testing & Validation
 - [ ] Property-based testing (QuickCheck-style)
 - [ ] Mutation-based fuzzing on state/action
 - [ ] Delta-debugging minimizer for counterexamples
-
-### Validation & Testing
 - [ ] Golden tests framework
-- [ ] Regression test suite
 - [ ] Automated simulation quality metrics
 
 ---
 
 ## Technical Debt
 
+Ongoing maintenance tasks:
+
 - [ ] Remove unused parameters (marked as `_param`)
-- [ ] Add unit tests for critical modules
-- [ ] Set up CI/CD pipeline
-- [ ] Add JSDoc documentation for all public APIs
+- [ ] Unit tests for critical modules
+- [ ] CI/CD pipeline setup
+- [ ] JSDoc documentation for public APIs
 
 ---
 
 ## Changelog
 
-### v2.4.1 (current)
-- Basic SDK structure
-- DroneSwarm, Warehouse scenarios (примеры в `examples/`)
-- AVEdgeCase scenario (код готов, примеры будут добавлены позже)
-- Local and Distributed executors (mock)
-- Collision detection (broadphase + narrowphase)
-- A* and RRT planners
-- Seeded RNG for determinism
+### v2.4.1 (Current)
+- Core SDK architecture
+- Scenarios: DroneSwarm, Warehouse (see `examples/`)
+- AVEdgeCase scenario (implementation ready, examples pending)
+- Local and Distributed executors (mock implementation)
+- Collision detection: broadphase + narrowphase pipeline
+- Pathfinding: A* and RRT planners
+- Seeded RNG for deterministic execution
 - Token-based authentication
+
+### v2.4.0
+- Initial public release
+- Basic simulation runtime
+- Entity and World abstractions

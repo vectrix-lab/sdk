@@ -242,6 +242,7 @@ export class AStarPlanner implements IPlanner {
 
   private hasLineOfSight(a: Vector3, b: Vector3): boolean {
     const steps = Math.ceil(Vec3.distance(a, b));
+    if (steps === 0) return true;
     for (let i = 0; i <= steps; i++) {
       const t = i / steps;
       const point = Vec3.lerp(a, b, t);

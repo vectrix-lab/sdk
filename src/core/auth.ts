@@ -92,6 +92,9 @@ export class AuthManager {
     }
 
     const trimmed = token.trim();
+    if (trimmed.length === 0) {
+      throw new TokenInvalidError('Token cannot be empty');
+    }
     this.validateTokenFormat(trimmed);
     this.token = trimmed;
     this.payload = null;

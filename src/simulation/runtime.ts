@@ -368,5 +368,3 @@ export function createQuickEntity(
   };
 }
 
-// Performance optimizations
-// Performance optimizations

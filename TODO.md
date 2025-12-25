@@ -21,7 +21,7 @@ Active development priorities for the next release:
 
 ## Milestone: v2.5.0 — Simulation Enhancements
 
-**Target:** Q1 2025
+**Target:** Q1 2026
 
 ### Core & Types
 - [ ] Image data encoding support for `CameraData`
@@ -42,7 +42,7 @@ Active development priorities for the next release:
 
 ## Milestone: v2.6.0 — Distributed Computing
 
-**Target:** Q2 2025
+**Target:** Q2 2026
 
 ### Distributed Executor
 - [ ] Remote worker communication (production-ready)
@@ -65,7 +65,7 @@ Active development priorities for the next release:
 
 ## Milestone: v3.0.0 — Integrations & Adapters
 
-**Target:** Q3 2025
+**Target:** Q3 2026
 
 ### Format Parsers
 - [ ] URDF parser for robot models

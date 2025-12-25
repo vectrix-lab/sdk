@@ -55,7 +55,10 @@
   ],
   "author": "VECTRIX Lab <sdk@vectrix.tech>",
   "license": "SEE LICENSE IN LICENSE",
-  "repository": "https://github.com/vectrix-lab/sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vectrix-lab/sdk.git"
+  },
   "bugs": {
     "url": "https://github.com/vectrix-lab/sdk/issues"
   },

@@ -359,7 +359,9 @@ export class VectrixClient {
         this.config.logger.error('Event handler error', {
           event: event.type,
           error: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
         });
+        // Continue processing other handlers even if one fails
       }
     }
   }
@@ -465,12 +467,12 @@ export class VectrixClient {
   }
 
   private async simulateApiCall(_endpoint: string, baseTimeMs: number): Promise<void> {
-    const jitter = Math.random() * 50;
-    const delay = baseTimeMs + jitter;
-
-    if (delay > this.config.timeout) {
+    if (baseTimeMs > this.config.timeout) {
       throw new TimeoutError(this.config.timeout, 0);
     }
+
+    const jitter = Math.random() * 50;
+    const delay = Math.min(baseTimeMs + jitter, this.config.timeout);
 
     return new Promise(resolve => setTimeout(resolve, delay));
   }

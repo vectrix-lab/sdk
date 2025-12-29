@@ -81,6 +81,9 @@ export class SmoothnessCost implements CostFunction {
       const dir1 = Vec3.normalize(Vec3.sub(current, prev));
       const dir2 = Vec3.normalize(Vec3.sub(next, current));
 
+      // Skip if direction vectors are zero (duplicate points)
+      if (Vec3.isZero(dir1) || Vec3.isZero(dir2)) continue;
+
       const dot = Vec3.dot(dir1, dir2);
       const angle = Math.acos(Math.max(-1, Math.min(1, dot)));
       totalAngle += angle;
@@ -102,6 +105,8 @@ export class ClearanceCost implements CostFunction {
   }
 
   evaluate(path: Vector3[], context: CostContext): number {
+    if (path.length === 0 || context.obstacles.length === 0) return 0;
+    
     const preferredClearance = context.preferredClearance ?? 2;
     let totalPenalty = 0;
 
@@ -145,11 +150,13 @@ export class TimeCost implements CostFunction {
 
   evaluate(path: Vector3[], context: CostContext): number {
     const maxVelocity = context.maxVelocity ?? 10;
+    if (maxVelocity <= 0) return Infinity;
+    
     const distance = new DistanceCost(1).evaluate(path);
     const time = distance / maxVelocity;
 
     // Add acceleration/deceleration time
-    const accelerationTime = (path.length - 1) * 0.1;
+    const accelerationTime = Math.max(0, path.length - 1) * 0.1;
 
     return (time + accelerationTime) * this.weight;
   }
@@ -273,6 +280,8 @@ export class CostEvaluator {
     paths: Vector3[][],
     context: CostContext
   ): Array<{ path: Vector3[]; cost: number; breakdown: CostBreakdown }> {
+    if (paths.length === 0) return [];
+    
     return paths
       .map(path => ({
         path,

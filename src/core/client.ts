@@ -146,7 +146,7 @@ export class VectrixClient {
    */
   private async verifyApiConnectivity(): Promise<void> {
     // Simulate API health check
-    await this.simulateApiCall('health', 50);
+    await this.simulateApiCall(50);
     this.config.logger.debug('API connectivity verified');
   }
 
@@ -228,7 +228,7 @@ export class VectrixClient {
     // Simulate processing time based on complexity
     const complexity = buildResult.entities.length * config.maxSteps;
     const simulatedTime = Math.min(complexity / 10000, this.config.timeout / 2);
-    await this.simulateApiCall('simulate', simulatedTime);
+    await this.simulateApiCall(simulatedTime);
 
     const simulationId = this.generateId('sim') as SimulationId;
     const now = Date.now();
@@ -311,7 +311,7 @@ export class VectrixClient {
     });
 
     // Simulate replay
-    await this.simulateApiCall('replay', 200);
+    await this.simulateApiCall(200);
 
     // Return mock result matching original
     const simulationId = this.generateId('sim') as SimulationId;
@@ -466,7 +466,7 @@ export class VectrixClient {
     }
   }
 
-  private async simulateApiCall(_endpoint: string, baseTimeMs: number): Promise<void> {
+  private async simulateApiCall(baseTimeMs: number): Promise<void> {
     if (baseTimeMs > this.config.timeout) {
       throw new TimeoutError(this.config.timeout, 0);
     }

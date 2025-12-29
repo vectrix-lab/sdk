@@ -54,8 +54,12 @@ export class SimpleBroadphase implements BroadphaseBackend {
   queryPairs(): BroadphaseResult {
     const pairs: CollisionPair[] = [];
     const entries = Array.from(this.entities.entries());
-    let checks = 0;
+    
+    if (entries.length < 2) {
+      return { pairs, checksPerformed: 0 };
+    }
 
+    let checks = 0;
     for (let i = 0; i < entries.length; i++) {
       for (let j = i + 1; j < entries.length; j++) {
         checks++;

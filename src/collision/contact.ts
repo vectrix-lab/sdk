@@ -151,7 +151,12 @@ export function applyFriction(
   let jt = -velocityAlongTangent / inverseMassSum;
 
   // Coulomb friction
-  const mu = Math.sqrt(bodyA.friction * bodyB.friction);
+  const frictionProduct = bodyA.friction * bodyB.friction;
+  if (frictionProduct < 0) {
+    return { velocityA: bodyA.velocity, velocityB: bodyB.velocity };
+  }
+  
+  const mu = Math.sqrt(frictionProduct);
   const maxFriction = Math.abs(normalImpulse) * mu;
 
   if (Math.abs(jt) > maxFriction) {

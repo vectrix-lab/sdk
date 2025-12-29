@@ -58,7 +58,7 @@ export class SimulationRuntime implements ISimulator {
   // ISimulator Implementation
   // ===========================================================================
 
-  async initialize(_config: SimulationConfig): Promise<void> {
+  async initialize(_config?: SimulationConfig): Promise<void> {
     if (this.initialized) return;
 
     this.logger?.debug('Initializing simulation runtime', {
@@ -72,7 +72,7 @@ export class SimulationRuntime implements ISimulator {
 
   async step(actions: Action[]): Promise<StateSnapshot> {
     if (!this.initialized) {
-      await this.initialize(this.config);
+      await this.initialize();
     }
 
     // Process actions

@@ -211,6 +211,11 @@ export function raycastSphere(
 ): RaycastResult {
   const oc = Vec3.sub(origin, center);
   const a = Vec3.dot(direction, direction);
+  
+  if (a === 0) {
+    return { hit: false };
+  }
+
   const b = 2 * Vec3.dot(oc, direction);
   const c = Vec3.dot(oc, oc) - radius * radius;
   const discriminant = b * b - 4 * a * c;
@@ -313,6 +318,3 @@ export function createCollisionEvent(
     type,
   };
 }
-
-// Edge case fixes applied
-// Edge case fixes

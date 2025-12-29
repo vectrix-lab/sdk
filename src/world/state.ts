@@ -101,7 +101,8 @@ export class StateBuilder {
       hash = hash & hash;
     }
 
-    return Math.abs(hash).toString(16).padStart(16, '0');
+    const result = Math.abs(hash).toString(16).padStart(16, '0');
+    return result || '0000000000000000';
   }
 }
 
@@ -235,14 +236,18 @@ export function deserializeState(data: SerializedState): StateSnapshot {
   const entities = new Map<EntityId, EntityState>();
 
   for (const e of data.entities) {
+    if (!e.pos || e.pos.length !== 3 || !e.rot || e.rot.length !== 4 || !e.vel || e.vel.length !== 3) {
+      continue; // Skip invalid entity data
+    }
+    
     entities.set(e.id as EntityId, {
       id: e.id as EntityId,
       transform: {
-        position: { x: e.pos[0], y: e.pos[1], z: e.pos[2] },
-        rotation: { x: e.rot[0], y: e.rot[1], z: e.rot[2], w: e.rot[3] },
+        position: { x: e.pos[0] ?? 0, y: e.pos[1] ?? 0, z: e.pos[2] ?? 0 },
+        rotation: { x: e.rot[0] ?? 0, y: e.rot[1] ?? 0, z: e.rot[2] ?? 0, w: e.rot[3] ?? 1 },
         scale: { x: 1, y: 1, z: 1 },
       },
-      velocity: { x: e.vel[0], y: e.vel[1], z: e.vel[2] },
+      velocity: { x: e.vel[0] ?? 0, y: e.vel[1] ?? 0, z: e.vel[2] ?? 0 },
       angularVelocity: { x: 0, y: 0, z: 0 },
       acceleration: { x: 0, y: 0, z: 0 },
       status: e.status as EntityState['status'],

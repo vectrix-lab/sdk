@@ -495,7 +495,7 @@ export function interpolatePath(
   path: Vector3[],
   maxSegmentLength: number
 ): Vector3[] {
-  if (path.length < 2) return path;
+  if (path.length < 2 || maxSegmentLength <= 0) return path;
 
   const result: Vector3[] = [path[0]!];
 
@@ -503,7 +503,7 @@ export function interpolatePath(
     const from = path[i - 1]!;
     const to = path[i]!;
     const distance = Vec3.distance(from, to);
-    const segments = Math.ceil(distance / maxSegmentLength);
+    const segments = Math.max(1, Math.ceil(distance / maxSegmentLength));
 
     for (let s = 1; s <= segments; s++) {
       const t = s / segments;

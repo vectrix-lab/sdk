@@ -36,6 +36,8 @@ export class EulerIntegrator implements Integrator {
   readonly order = 1;
 
   integrate(state: IntegratorState, dt: number): IntegratorResult {
+    if (dt <= 0) return { position: state.position, velocity: state.velocity };
+    
     // Simple forward Euler: pos += vel * dt, vel += acc * dt
     const newVelocity = Vec3.add(state.velocity, Vec3.mul(state.acceleration, dt));
     const newPosition = Vec3.add(state.position, Vec3.mul(state.velocity, dt));
@@ -56,6 +58,8 @@ export class SemiImplicitEulerIntegrator implements Integrator {
   readonly order = 1;
 
   integrate(state: IntegratorState, dt: number): IntegratorResult {
+    if (dt <= 0) return { position: state.position, velocity: state.velocity };
+    
     // Update velocity first, then use new velocity for position
     const newVelocity = Vec3.add(state.velocity, Vec3.mul(state.acceleration, dt));
     const newPosition = Vec3.add(state.position, Vec3.mul(newVelocity, dt));
@@ -183,6 +187,17 @@ export function checkStability(
     maxAcceleration?: number;
   }
 ): StabilityResult {
+  if (states.length === 0) {
+    return {
+      stable: true,
+      maxVelocity: 0,
+      maxAcceleration: 0,
+      hasNaN: false,
+      hasInfinity: false,
+      divergenceDetected: false,
+    };
+  }
+
   const maxVel = thresholds?.maxVelocity ?? 1000;
   const maxAcc = thresholds?.maxAcceleration ?? 10000;
 
@@ -242,8 +257,12 @@ export function checkEnergyConservation(
   currentEnergy: number,
   tolerance = 0.01
 ): { conserved: boolean; drift: number; driftPercent: number } {
+  if (!Number.isFinite(initialEnergy) || !Number.isFinite(currentEnergy)) {
+    return { conserved: false, drift: Infinity, driftPercent: Infinity };
+  }
+  
   const drift = Math.abs(currentEnergy - initialEnergy);
-  const driftPercent = initialEnergy > 0 ? drift / initialEnergy : drift;
+  const driftPercent = Math.abs(initialEnergy) > 1e-10 ? drift / Math.abs(initialEnergy) : drift;
 
   return {
     conserved: driftPercent <= tolerance,

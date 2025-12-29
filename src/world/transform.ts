@@ -51,6 +51,9 @@ export const Vec3 = {
   },
 
   div(v: Vector3, scalar: number): Vector3 {
+    if (scalar === 0) {
+      return { x: 0, y: 0, z: 0 };
+    }
     return { x: v.x / scalar, y: v.y / scalar, z: v.z / scalar };
   },
 
@@ -75,9 +78,10 @@ export const Vec3 = {
   },
 
   normalize(v: Vector3): Vector3 {
-    const len = Vec3.length(v);
-    if (len === 0) return Vec3.zero();
-    return Vec3.div(v, len);
+    const lenSq = Vec3.lengthSq(v);
+    if (lenSq === 0) return Vec3.zero();
+    const len = Math.sqrt(lenSq);
+    return { x: v.x / len, y: v.y / len, z: v.z / len };
   },
 
   distance(a: Vector3, b: Vector3): number {

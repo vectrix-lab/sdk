@@ -585,3 +585,346 @@ export type Capability =
   | 'replay'
   | 'streaming';
 
+// =============================================================================
+// Route & Road Network Types
+// =============================================================================
+
+export interface RouteWaypoint {
+  id: string;
+  position: Vector3;
+  heading: number;
+  speedLimit?: number;
+  stopRequired?: boolean;
+  waitTime?: number;
+  laneId?: string;
+}
+
+export interface Route {
+  id: string;
+  waypoints: RouteWaypoint[];
+  totalDistance: number;
+  estimatedTime: number;
+  metadata?: Record<string, unknown>;
+}
+
+export interface Lane {
+  id: string;
+  startPosition: Vector3;
+  endPosition: Vector3;
+  width: number;
+  speedLimit: number;
+  direction: 'forward' | 'backward' | 'bidirectional';
+  laneType: LaneType;
+  connectedLanes: string[];
+  restrictions?: LaneRestriction[];
+}
+
+export type LaneType =
+  | 'driving'
+  | 'parking'
+  | 'bus'
+  | 'bicycle'
+  | 'emergency'
+  | 'turning'
+  | 'merge'
+  | 'exit';
+
+export type LaneRestriction =
+  | 'no-trucks'
+  | 'hov-only'
+  | 'no-left-turn'
+  | 'no-right-turn'
+  | 'no-u-turn'
+  | 'speed-limit';
+
+export interface RoadSegment {
+  id: string;
+  lanes: Lane[];
+  startNode: string;
+  endNode: string;
+  roadType: RoadType;
+  surface: RoadSurface;
+  speedLimit: number;
+  length: number;
+}
+
+export type RoadType =
+  | 'highway'
+  | 'arterial'
+  | 'collector'
+  | 'local'
+  | 'residential'
+  | 'parking-lot'
+  | 'private';
+
+export type RoadSurface =
+  | 'asphalt'
+  | 'concrete'
+  | 'gravel'
+  | 'dirt'
+  | 'wet'
+  | 'icy'
+  | 'snow-covered';
+
+export interface TrafficSignal {
+  id: string;
+  position: Vector3;
+  signalType: TrafficSignalType;
+  currentState: TrafficSignalState;
+  cycleTime: number;
+  phases: TrafficPhase[];
+}
+
+export type TrafficSignalType =
+  | 'traffic-light'
+  | 'pedestrian-signal'
+  | 'railway-crossing'
+  | 'flashing-beacon';
+
+export type TrafficSignalState =
+  | 'red'
+  | 'yellow'
+  | 'green'
+  | 'flashing-red'
+  | 'flashing-yellow'
+  | 'off';
+
+export interface TrafficPhase {
+  state: TrafficSignalState;
+  duration: number;
+  allowedMovements: string[];
+}
+
+export interface TrafficSign {
+  id: string;
+  position: Vector3;
+  signType: TrafficSignType;
+  value?: number;
+  text?: string;
+}
+
+export type TrafficSignType =
+  | 'stop'
+  | 'yield'
+  | 'speed-limit'
+  | 'no-entry'
+  | 'one-way'
+  | 'no-parking'
+  | 'school-zone'
+  | 'construction'
+  | 'pedestrian-crossing'
+  | 'railroad-crossing'
+  | 'merge'
+  | 'lane-ends'
+  | 'curve-ahead'
+  | 'intersection-ahead';
+
+// =============================================================================
+// AV Edge Case Types
+// =============================================================================
+
+export interface AVScenarioEvent {
+  id: string;
+  timestamp: number;
+  eventType: AVEventType;
+  entityId?: EntityId;
+  position?: Vector3;
+  parameters: Record<string, unknown>;
+  duration?: number;
+}
+
+export type AVEventType =
+  | 'sudden-brake'
+  | 'lane-change'
+  | 'cut-in'
+  | 'cut-out'
+  | 'pedestrian-crossing'
+  | 'jaywalking'
+  | 'door-opening'
+  | 'vehicle-emerging'
+  | 'debris-on-road'
+  | 'animal-crossing'
+  | 'emergency-vehicle'
+  | 'traffic-signal-change'
+  | 'construction-zone-start'
+  | 'weather-change'
+  | 'sensor-occlusion'
+  | 'gps-dropout';
+
+export interface OracleViolation {
+  oracleType: OracleCheckType;
+  timestamp: number;
+  step: number;
+  severity: ViolationSeverity;
+  entityId?: EntityId;
+  description: string;
+  data: Record<string, unknown>;
+}
+
+export type OracleCheckType =
+  | 'no-collision'
+  | 'lane-keep'
+  | 'speed-limit'
+  | 'safe-distance'
+  | 'traffic-rules'
+  | 'pedestrian-yield'
+  | 'signal-compliance'
+  | 'right-of-way'
+  | 'minimum-gap'
+  | 'lateral-acceleration'
+  | 'jerk-limit'
+  | 'time-to-collision';
+
+export type ViolationSeverity = 'info' | 'warning' | 'critical' | 'fatal';
+
+export interface AVMetrics {
+  timeToCollision: number;
+  minDistanceToPedestrian: number;
+  minDistanceToVehicle: number;
+  maxLateralAcceleration: number;
+  maxLongitudinalAcceleration: number;
+  maxJerk: number;
+  laneDeviationMax: number;
+  speedLimitViolations: number;
+  trafficRuleViolations: number;
+  comfortScore: number;
+  safetyScore: number;
+}
+
+export interface PresetScenario {
+  id: string;
+  name: string;
+  description: string;
+  category: PresetScenarioCategory;
+  difficulty: ScenarioDifficulty;
+  config: Partial<AVEdgeCasePresetConfig>;
+  events: AVScenarioEvent[];
+  expectedBehavior: string;
+}
+
+export type PresetScenarioCategory =
+  | 'intersection'
+  | 'highway'
+  | 'parking'
+  | 'pedestrian'
+  | 'weather'
+  | 'sensor-failure'
+  | 'edge-case'
+  | 'regulatory';
+
+export type ScenarioDifficulty = 'easy' | 'medium' | 'hard' | 'extreme';
+
+export interface AVEdgeCasePresetConfig {
+  roadNetwork: RoadNetworkType;
+  weatherConditions: WeatherConditionType;
+  lightingCondition: LightingConditionType;
+  trafficDensity: number;
+  pedestrianDensity: number;
+  egoVehicleSpeed: number;
+}
+
+export type RoadNetworkType =
+  | 'straight-road'
+  | 'urban-intersection'
+  | 'highway-merge'
+  | 'roundabout'
+  | 't-junction'
+  | 'parking-lot'
+  | 'construction-zone'
+  | 'school-zone'
+  | 'residential'
+  | 'highway-exit'
+  | 'multi-lane-highway';
+
+export type WeatherConditionType =
+  | 'clear'
+  | 'rain'
+  | 'heavy-rain'
+  | 'fog'
+  | 'dense-fog'
+  | 'snow'
+  | 'ice'
+  | 'sleet'
+  | 'sandstorm'
+  | 'hail';
+
+export type LightingConditionType =
+  | 'daylight'
+  | 'dawn'
+  | 'dusk'
+  | 'night'
+  | 'night-streetlights'
+  | 'glare'
+  | 'tunnel'
+  | 'shadows';
+
+export type FuzzingModeType =
+  | 'random'
+  | 'adversarial'
+  | 'coverage'
+  | 'boundary'
+  | 'mutation'
+  | 'guided'
+  | 'replay';
+
+export interface VehicleProfile {
+  vehicleType: VehicleType;
+  length: number;
+  width: number;
+  height: number;
+  mass: number;
+  maxSpeed: number;
+  maxAcceleration: number;
+  maxDeceleration: number;
+  turnRadius: number;
+}
+
+export type VehicleType =
+  | 'sedan'
+  | 'suv'
+  | 'truck'
+  | 'motorcycle'
+  | 'bus'
+  | 'van'
+  | 'semi-truck'
+  | 'emergency'
+  | 'bicycle'
+  | 'scooter';
+
+export interface PedestrianProfile {
+  pedestrianType: PedestrianType;
+  walkingSpeed: number;
+  runningSpeed: number;
+  reactionTime: number;
+  attentionLevel: number;
+  predictability: number;
+}
+
+export type PedestrianType =
+  | 'adult'
+  | 'child'
+  | 'elderly'
+  | 'disabled'
+  | 'jogger'
+  | 'cyclist'
+  | 'group'
+  | 'distracted';
+
+export interface DriverBehavior {
+  behaviorType: DriverBehaviorType;
+  aggressiveness: number;
+  reactionTime: number;
+  laneKeepingAbility: number;
+  followingDistance: number;
+  speedVariation: number;
+}
+
+export type DriverBehaviorType =
+  | 'normal'
+  | 'cautious'
+  | 'aggressive'
+  | 'distracted'
+  | 'impaired'
+  | 'learner'
+  | 'professional';
+
